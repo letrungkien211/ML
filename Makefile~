@@ -1,4 +1,4 @@
-SUBDIRS = BPNN Data Utils
+SUBDIRS = BPNN Data HMM
 
 all:
 	for dir in $(SUBDIRS); do \

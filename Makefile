@@ -1,6 +1,8 @@
 SUBDIRS = BPNN Data HMM
 
-all:
+all: subdirs
+
+subdirs:
 	for dir in $(SUBDIRS); do \
 	$(MAKE) -C $$dir; \
 	done;
