@@ -1,0 +1,31 @@
+#ifndef UTILS_HPP
+#define UTILS_HPP
+
+#include <cv.h>
+#include <Eigen/Dense>
+#include <string>
+
+namespace Utils{
+
+    using namespace cv;
+    using namespace std;
+    using namespace Eigen;
+    void Unroll(const Mat &src, Mat &des);
+    MatrixXd AddOne(const MatrixXd &m);
+
+    MatrixXd RemoveOne(const MatrixXd &m);
+
+    Mat eigen2cv(const MatrixXd& eigenMat);
+
+    MatrixXd cv2eigen(const Mat& cvMat);
+
+    MatrixXd Sigmoid(const MatrixXd& v);
+
+    MatrixXd SigmoidGrad(const MatrixXd& v);
+
+    double Sigmoid(double z);
+
+    double SigmoidGrad(double z);
+};
+
+#endif

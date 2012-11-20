@@ -1,16 +1,19 @@
+#include "data.hpp"
+#include <string>
 #include <cv.h>
 #include <highgui.h>
 #include <iostream>
 #include <cstdio>
 #include <vector>
 
-#include "image2matrix.hpp"
-
 using namespace std;
 using namespace cv;
+using namespace Utils;
 
-void Image2Matrix(const string &dirName, const string &imgFileName,
-		  const string &outputFileName, int imgNum){
+void Data::Image2Matrix(const string &dirName, 
+			const string &imgFileName,
+			const string &outputFileName, 
+			int imgNum){
     char fname[100];
     char nodename[100];
     sprintf(fname, "%s/%s.xml", dirName.c_str(), outputFileName.c_str());
@@ -32,13 +35,25 @@ void Image2Matrix(const string &dirName, const string &imgFileName,
 }
 
 
+void Data::Load(const string &dataFileName, 
+		const string& labelFileName,
+		Mat &trainData, 
+		Mat & trainLabel,
+		int numData)
+{
+    FileStorage dataFile(dataFileName, CV_STORAGE_READ);
+    FileStorage labelFile(labelFileName, CV_STORAGE_READ);
 
-int main(int argc, char **argv){
-    string dirName(argv[1]);
-    string imgFileName(argv[2]);
-    string outputFileName(argv[3]);
-    int imgNum = atoi(argv[4]);
-
-    Image2Matrix(dirName, imgFileName, outputFileName, imgNum);
-    return 0;
+    labelFile["label"] >> trainLabel;
+    char str[100];
+    for(int i = 1 ; i<numData; i++){
+	sprintf(str, "data_%04d", i);
+	Mat data;
+	dataFile[str] >> data;
+	Mat tmp;
+	Unroll(data, tmp);
+	trainData.push_back(tmp);
+    }
 }
+
+
