@@ -20,6 +20,8 @@ public:
 			     const string &imgFileName,
 			     const string &outputFileName, 
 			     int imgNum);
+
+
 };
 
 #endif
