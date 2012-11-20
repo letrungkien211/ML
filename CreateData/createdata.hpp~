@@ -1,0 +1,23 @@
+#ifndef CREATE_DATA_HPP
+#define CREATE_DATA_HPP
+
+void Image2Matrix(const string &dirName, const string &imgFileName,
+		  const string &outputFileName, int imgNum){
+    char fname[100];
+    char nodename[100];
+    sprintf(fname, "%s/%s.xml", dirName.c_str(), outputFileName.c_str());
+    FileStorage cbfs(fname, CV_STORAGE_WRITE);
+
+    for(int i = 1; i<imgNum; i++){
+	cout << i << endl;
+	sprintf(fname, "%s/%s%04d.jpg", dirName.c_str(), imgFileName.c_str(),i);
+	Mat cimg = imread(fname);
+	cout << fname <<endl;
+	sprintf(nodename, "data_%04d", i);
+	cbfs << string(nodename) << cimg;
+    }
+
+}
+
+
+#endif

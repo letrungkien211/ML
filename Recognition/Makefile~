@@ -1,0 +1,24 @@
+CC = g++
+RM = rm -f
+GIT= git 
+
+CFLAGS	= -Wall -g -O2
+LDFLAGS	= -Wall -g -O2
+INCLUDES  = ${shell pkg-config opencv --cflags} -I/usr/include/eigen3
+LIBS += ${shell pkg-config opencv --libs}
+
+TARGET	= main 
+OBJS =  bpnn.o myeigen.o
+all:	$(TARGET)
+
+
+$(TARGET): % : %.o $(OBJS)
+	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+
+clean:
+	$(RM)  $(TARGET) $(OBJS) *.o *~
+
+.cpp.o:
+	$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
+
+
