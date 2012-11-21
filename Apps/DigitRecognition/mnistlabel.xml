@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <opencv_storage>
-  <mnist type_id="opencv-matrix">
+  <mnistlabel type_id="opencv-matrix">
     <rows>900</rows>
     <cols>1</cols>
     <dt>f</dt>
@@ -906,5 +906,5 @@
       7
       8
     </data>
-  </mnist>
+  </mnistlabel>
 </opencv_storage>

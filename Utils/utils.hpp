@@ -26,6 +26,8 @@ namespace Utils{
     double Sigmoid(double z);
 
     double SigmoidGrad(double z);
+    
+    void LabelToMatrix(const MatrixXd &label, int outputSize, MatrixXd &output);
 };
 
 #endif

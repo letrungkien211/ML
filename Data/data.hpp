@@ -21,7 +21,6 @@ public:
 			     const string &outputFileName, 
 			     int imgNum);
 
-
 };
 
 #endif

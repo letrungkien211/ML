@@ -98,7 +98,16 @@ namespace Utils{
 	double sig = Sigmoid(z);
 	return sig*(1-sig);
     }
-
+    
+    void LabelToMatrix(const MatrixXd &label, int outputSize, MatrixXd &output){
+	int numData = label.rows();
+	if(output.rows()!= numData || output.rows()!=outputSize)
+	    output.resize(numData, outputSize);
+	output.fill(0);
+	for(int i =0; i<numData; i++){
+	    output.row(i)(label(i)) = 1;
+	}
+    }
 };
 
 
