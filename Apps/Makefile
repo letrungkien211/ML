@@ -1,4 +1,4 @@
-SUBDIRS = BPNN Data HMM Apps
+SUBDIRS = DigitRecognition
 
 all: subdirs
 

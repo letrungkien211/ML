@@ -25,8 +25,7 @@ int maxIteration = 3000;
 double learningRate = 0.2;
 double lambda = 0.1;
 double momentum = 0.5;
-int maxIteration = 2000;
-double threshold = 0.1;
+double threshold_ = 0.1;
 
 int main(int argc, char **argv){
     MatrixXd data, label, 
@@ -70,7 +69,7 @@ int main(int argc, char **argv){
     cout << label.rows() << " " <<label.cols() << endl;
 
     bpnn.SetWeight();
-    bpnn = bpnn.Train(trainInput, trainOutput, learningRate, lambda, momentum,maxIteration, threshold);
+    bpnn = bpnn.Train(trainInput, trainOutput, learningRate, lambda, momentum,maxIteration, threshold_);
 
     bpnn.Predict(testInput, trainedTestOutput, trainedTestLabel);
     
