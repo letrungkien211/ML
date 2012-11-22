@@ -1,6 +1,7 @@
 CC = g++
 RM = rm -f
 CD = cd
+CP = cp 
 MLDIR = $(HOME)/Dropbox/git/ML
 
 
@@ -19,6 +20,7 @@ all:	$(TARGET)
 
 $(TARGET): % :  $(OBJS) %.o
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBS) 
+	$(CP) $@ $(MLDIR)/Bin
 
 .cpp.o:
 	$(CC) $(CFLAGS) $(INCLUDES) -c -o $@ $< 

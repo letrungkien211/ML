@@ -45,21 +45,18 @@ int main(int argc, char **argv){
     
     cout << "Start Convert" <<endl;
     data = cv2eigen(cvTrainData);
-    //cout <<data <<endl;
-    //getchar();
+
     label = cv2eigen(cvTrainLabel);
     LabelToMatrix(label, 10, trainOutput);
 
     cout << "Initialize " << endl;
     trainInput = data.block(0,0,numTrain,400);
-    //cout <<trainInput<<endl;
-    //getchar();
+
     trainLabel = label.block(0,0,numTrain,1);
     LabelToMatrix(trainLabel, 10, trainOutput);
 
     testInput = data.block(numTrain,0,numTest,400);
-//    cout <<"TEst inut\n" << testInput <<endl;
-    //getchar();
+
     testLabel = label.block(numTrain,0,numTest,1);
     LabelToMatrix(testLabel,10, testOutput);
 
@@ -73,7 +70,7 @@ int main(int argc, char **argv){
 
     bpnn.Predict(testInput, trainedTestOutput, trainedTestLabel);
     
-//    cout <<"traintest output\n "<<trainedTestOutput <<endl;
+
     int cnt = 0;
     cout <<"TEst inut\n" << testInput <<endl;
     for(int i = 0; i < numTest; i++){
@@ -90,13 +87,6 @@ int main(int argc, char **argv){
 
 
 /*************************************************/
-
-
-
-
-
-
-
 
 
 
