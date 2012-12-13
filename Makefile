@@ -1,4 +1,4 @@
-SUBDIRS = BPNN Data HMM Apps
+SUBDIRS = BPNN HMM Apps
 
 all: subdirs
 
