@@ -10,11 +10,11 @@ INCLUDES=	`pkg-config opencv --cflags` \
 		-I/usr/include/eigen3	\
 		-I$(MLDIR)/Utils \
 		-I$(MLDIR)/BPNN \
-		-I$(MLDIR)/Data 
+
 LIBS = `pkg-config opencv --libs`
 
 TARGET	= digitreg
-OBJS 	= $(MLDIR)/Utils/utils.o $(MLDIR)/BPNN/bpnn.o $(MLDIR)/Data/data.o
+OBJS 	= $(MLDIR)/Utils/utils.o $(MLDIR)/BPNN/bpnn.o $(MLDIR)/Utils/data.o
 all:	$(TARGET)
 
 

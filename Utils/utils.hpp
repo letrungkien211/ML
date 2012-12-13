@@ -10,7 +10,7 @@ namespace Utils{
     using namespace cv;
     using namespace std;
     using namespace Eigen;
-    void Unroll(const Mat &src, Mat &des);
+    void Unroll(const MatrixXd &src, MatrixXd &des);
     MatrixXd AddOne(const MatrixXd &m);
 
     MatrixXd RemoveOne(const MatrixXd &m);

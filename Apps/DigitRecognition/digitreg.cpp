@@ -1,16 +1,16 @@
+/*************************************************/
+#include <iostream>
+#include <Eigen/Dense>
+#include <cstdlib>
+#include <ctime>
+#include <fstream>
+
 // My headers
 #include "bpnn.hpp"
 #include "utils.hpp"
 #include "data.hpp"
 
 /*************************************************/
-#include <iostream>
-#include <Eigen/Dense>
-#include "cv.h"
-#include "highgui.h"
-#include <cstdlib>
-#include <ctime>
-#include <fstream>
 
 using namespace std;
 using namespace Eigen;
@@ -33,7 +33,6 @@ int main(int argc, char **argv){
 	testInput, testLabel, testOutput,
 	trainedTestLabel, trainedTestOutput;
 
-    Mat cvTrainData, cvTrainLabel;
     string dataFileName("mnistdata.xml");
     string labelFileName("mnistlabel.xml");
 
@@ -41,12 +40,9 @@ int main(int argc, char **argv){
     BPNN bpnn(400,numHidden,10);
 
     cout << "Start Load" <<endl;
-    Data::Load(dataFileName, labelFileName, cvTrainData, cvTrainLabel, numData);
+    Data::Load(dataFileName, labelFileName, data, label, numData);
     
     cout << "Start Convert" <<endl;
-    data = cv2eigen(cvTrainData);
-
-    label = cv2eigen(cvTrainLabel);
     LabelToMatrix(label, 10, trainOutput);
 
     cout << "Initialize " << endl;
@@ -83,12 +79,4 @@ int main(int argc, char **argv){
     
     return 0;
 }
-
-
-
 /*************************************************/
-
-
-
-
-

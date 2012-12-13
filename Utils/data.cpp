@@ -5,7 +5,8 @@
 #include <iostream>
 #include <cstdio>
 #include <vector>
-
+#include <algorithm>
+#include <cassert>
 using namespace std;
 using namespace cv;
 using namespace Utils;
@@ -37,30 +38,35 @@ void Data::Image2Matrix(const string &dirName,
 
 void Data::Load(const string &dataFileName, 
 		const string &labelFileName,
-		Mat &trainData, 
-		Mat &trainLabel,
+		MatrixXd &trainData, 
+		MatrixXd &trainLabel,
 		int numData)
 {
     FileStorage dataFile(dataFileName, CV_STORAGE_READ);
     FileStorage labelFile(labelFileName, CV_STORAGE_READ);
 
-    labelFile["mnistlabel"] >> trainLabel;
-
-    numData = max(numData, trainLabel.rows);
+    Mat tmpTrainLabel;
+    labelFile["mnistlabel"] >> tmpTrainLabel;
+    trainLabel = cv2eigen(tmpTrainLabel);
+    assert(numData <= trainLabel.rows());
+    cout << "Start " <<endl;
     char str[100];
     for(int i = 0 ; i<numData; i++){
+	cout << "#" << i<<endl;
 	sprintf(str, "%s%04d", "mnistdata", i);
 	cout <<str<<endl;
 	Mat data;
 	dataFile[str] >> data;
+	assert(data.rows>0);
 	if(i==0){
-	    if(trainData.rows!=numData || trainData.cols!=data.rows*data.cols)
-		trainData = Mat::zeros(numData, data.rows*data.cols, CV_32F);
+	    if(trainData.rows()!=numData || trainData.cols()!=data.rows*data.cols)
+		trainData.resize(numData, data.rows*data.cols);
 	}
-	Mat tmp;
-	Unroll(data, tmp);
-	//cout << tmp<<endl;
-	tmp.copyTo(trainData.row(i));
+	MatrixXd tmp;
+	cout << "#" << i<<endl;
+	Unroll(cv2eigen(data), tmp);
+	cout << "#" << i<<endl;
+	trainData.row(i) = tmp;
     }
 }
 

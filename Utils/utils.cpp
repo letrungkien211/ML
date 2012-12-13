@@ -6,21 +6,22 @@
 #include "utils.hpp"
 
 namespace Utils{
-
     using namespace cv;
     using namespace std;
     using namespace Eigen;
 
-    void Unroll(const Mat &src, Mat &des){
-	int rows = src.rows;
-	int cols = src.cols;
-	if(des.rows!=1 || des.cols!=rows*cols)
-	    des= Mat::zeros(1, rows*cols, CV_32F);
-	for(int i = 0, rows = src.rows; i< rows; ++i){
-	    for(int j = 0, cols = src.cols; j< cols; j++){
-		des.at<float>(i*cols+j) = src.at<float>(i,j);
+    void Unroll(const MatrixXd &src, MatrixXd &des){
+	// cout << "Start unroll" <<endl;
+	int rows = src.rows();
+	int cols = src.cols();
+	if(des.rows()!=1 || des.cols()!=rows*cols)
+	    des.resize(1, rows*cols);
+	for(int i = 0; i< rows; ++i){
+	    for(int j = 0; j< cols; j++){
+		des(0,i*cols + j) = src(i,j);
 	    }
 	}
+	// cout << "End unroll" <<endl;
     }
     MatrixXd cv2eigen(const Mat& cvMat){
 	int rows = cvMat.rows;
