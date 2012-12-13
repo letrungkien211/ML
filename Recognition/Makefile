@@ -4,7 +4,9 @@ GIT= git
 
 CFLAGS	= -Wall -g -O2
 LDFLAGS	= -Wall -g -O2
-INCLUDES  = ${shell pkg-config opencv --cflags} -I/usr/include/eigen3
+INCLUDES= ${shell pkg-config opencv --cflags} \
+	-I/usr/include/eigen3	\
+	-I../BPNN/
 LIBS += ${shell pkg-config opencv --libs}
 
 TARGET	= recognition

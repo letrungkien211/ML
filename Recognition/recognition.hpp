@@ -2,7 +2,7 @@
 #define RECOGNITION_HPP
 
 #include <Eigen/Dense>
-#include "../BPNN/bpnn.hpp"
+#include "bpnn.hpp"
 
 using namespace std;
 using namespace Eigen;

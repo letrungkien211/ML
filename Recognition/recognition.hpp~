@@ -1,9 +1,0 @@
-#ifndef RECOGNITION_HPP
-#define RECOGNITION_HPP
-
-class Recognition{
-
-};
-
-
-#endif
