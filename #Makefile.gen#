@@ -1,4 +1,0 @@
-CC	= g++
-RM	= rm -f
-
-INCLUDES = . 
