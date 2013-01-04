@@ -4,6 +4,8 @@
 #include <highgui.h>
 #include <iostream>
 #include <cstdio>
+#include <ctime>
+#include <cstdlib>
 #include <vector>
 #include <algorithm>
 #include <cassert>
@@ -23,7 +25,7 @@ void Data::Image2Matrix(const string &dirName,
     cout << "Start Image2Matrix" <<endl;
     for(int i = 0; i<imgNum; i++){
 	sprintf(fname, "%s/%s%04d.jpg", dirName.c_str(), imgFileName.c_str(),i+1);
-	cout << fname <<endl;
+//	cout << fname <<endl;
 	Mat cimg = imread(fname);
 	Mat gimg;
 	cvtColor(cimg, gimg,CV_RGB2GRAY);
@@ -49,12 +51,12 @@ void Data::Load(const string &dataFileName,
     labelFile["mnistlabel"] >> tmpTrainLabel;
     trainLabel = cv2eigen(tmpTrainLabel);
     assert(numData <= trainLabel.rows());
-    cout << "Start " <<endl;
+//    cout << "Start Load" <<endl;
     char str[100];
     for(int i = 0 ; i<numData; i++){
-	cout << "#" << i<<endl;
+//	cout << "#" << i<<endl;
 	sprintf(str, "%s%04d", "mnistdata", i);
-	cout <<str<<endl;
+//	cout <<str<<endl;
 	Mat data;
 	dataFile[str] >> data;
 	assert(data.rows>0);
@@ -63,10 +65,24 @@ void Data::Load(const string &dataFileName,
 		trainData.resize(numData, data.rows*data.cols);
 	}
 	MatrixXd tmp;
-	cout << "#" << i<<endl;
+//	cout << "#" << i<<endl;
 	Unroll(cv2eigen(data), tmp);
-	cout << "#" << i<<endl;
+//	cout << "#" << i<<endl;
 	trainData.row(i) = tmp;
     }
 }
 
+void Data::MakeNoise(const MatrixXd &src, MatrixXd &des, double range){
+    unsigned int rows = src.rows();
+    unsigned int cols = src.cols();
+    if(des.rows()!=rows || des.cols()!=cols){
+	des.resize(rows, cols);
+    }
+    for(int i = 0; i < rows; i++){
+	for(int j = 0; j <cols; j++){
+	    des(i,j) = src(i,j)+(range*(rand()/(double)RAND_MAX)-range/2.0);
+	    des(i,j) = des(i,j) > 1 ? 1 : des(i,j);
+	    des(i,j) = des(i,j) < 0 ? 0 : des(i,j);
+	}
+    }
+}

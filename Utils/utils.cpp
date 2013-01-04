@@ -109,6 +109,19 @@ namespace Utils{
 	    output.row(i)(label(i)) = 1;
 	}
     }
+
+    void SaveMatrix(const MatrixXd &m, const string &filename){
+	FileStorage file(filename, CV_STORAGE_WRITE);
+	Mat tmp = eigen2cv(m);
+	file << filename << tmp;
+    }
+
+    void LoadMatrix(MatrixXd &m, const string &filename){
+	FileStorage file(filename, CV_STORAGE_READ);
+	Mat tmp;
+	file[filename] >> tmp;
+	m = cv2eigen(tmp);
+    }
 };
 
 

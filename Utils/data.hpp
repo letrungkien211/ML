@@ -20,7 +20,7 @@ public:
 			     const string &imgFileName,
 			     const string &outputFileName, 
 			     int imgNum);
-
+    static void MakeNoise(const MatrixXd &src, MatrixXd &des, double range);
 };
 
 #endif
