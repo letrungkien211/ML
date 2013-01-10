@@ -82,7 +82,7 @@ int Exp1(int numTrain, double noiseRatio, int numHidden, int maxIteration,
 
     bpnn.SetWeight();
     double trainError;
-    bpnn = bpnn.Train(trainInput, trainOutput, learningRate, lambda, momentum, maxIteration, threshold_, trainError);
+    bpnn = bpnn.Train(trainInput, trainOutput, learningRate, lambda, momentum, maxIteration, threshold, trainError);
     bpnn.Predict(testInput, trainedTestOutput, trainedTestLabel);
     bpnn.ComputeAll(crossInput, trainedCrossOutput);
     crossError = 1/(2.0*numCross)*((trainedCrossOutput-crossOutput).squaredNorm());
@@ -95,7 +95,12 @@ int Exp1(int numTrain, double noiseRatio, int numHidden, int maxIteration,
     }
     // cout << numHidden <<", " << trainError <<", " << crossError <<", " << cnt/(double)numTest <<endl;
     //cout << numTrain <<", " << trainError <<", " << crossError <<", " << cnt/(double)numTest <<endl;
-    cout << noiseRatio <<", " << trainError <<", " << crossError <<", " << cnt/(double)numTest <<endl;
+    //cout << noiseRatio <<", " << trainError <<", " << crossError <<", " << cnt/(double)numTest <<endl;
+    //cout << numHidden <<", " << trainError <<", " << crossError <<", " << cnt/(double)numTest <<endl;
+    //cout << lambda <<", " << trainError <<", " << crossError <<", " << cnt/(double)numTest <<endl;
+    cout << "Train Error: " << trainError <<endl;
+    cout << "Cross Validation Error: " << crossError <<endl;
+    cout << "Precision: " << cnt/(double)numTest <<endl;
     return 0;
 }
 
@@ -109,9 +114,20 @@ int main(int argc, char **argv){
     // 	Exp1(300,i,1000,learningRate,0,momentum,0.0001);
     // }
 
-    for(int i = 1; i <= 25; i++){
-	Exp1(300,i/100.0, 10,1000,learningRate,0,momentum,0.00001);
-    }
+    // for(int i = 1; i <= 25; i++){
+    // 	Exp1(300,i/100.0, 10,1000,learningRate,0,momentum,0.00001);
+    // }
+
+    // for(int i = 5; i < 60; i+=2){
+    // 	Exp1(300,0.25, i,10000,learningRate,0,momentum,0.001);
+    // }
+
+    // double lambda[] = {0.00, 0.001, 0.003, 0.01, 0.03, 0.1,0.3, 0.5};
+    // for(int i = 0; i < 7; i++){
+    // 	Exp1(300,0.25, 50,10000,learningRate,lambda[i],momentum,0.001);
+    // }
+
+    Exp1(400,0.25, 20,10000,learningRate,0.1,momentum,0.001);
 }
 
 

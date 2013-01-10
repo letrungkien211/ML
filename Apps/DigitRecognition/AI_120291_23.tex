@@ -1,5 +1,4 @@
 \documentclass[a4paper, 11pt]{article}
-
 %%% Packages
 \usepackage[margin=50pt, vmargin={50pt, 10pt},includefoot]{geometry}
 \usepackage{palatino}
@@ -10,17 +9,14 @@
 \usepackage{color}
 \usepackage{url}
 \usepackage{hyperref}
-
 \hypersetup{
   colorlinks = false,
   pdfborder={0 0 0}
 }
-
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
 \definecolor{red}{rgb}{0.8,0,0}
-
 \lstset{ 
   language=C++,                % the language of the code
   basicstyle=\footnotesize,           % the size of the fonts that are used for the code
@@ -47,9 +43,6 @@
   emph={string, Puzzle, Board, multiset},  % emphasized characters
   emphstyle={\color{dkgreen}}
 }
-
-%%% End listing
-
 \begin{document}
 \title{Artificial Intelligence Report 7th Week-23rd Problem}
 \author{Le Trung Kien\\ 
@@ -58,13 +51,12 @@
   The University of Tokyo
 }
 \maketitle
-
 \section*{Note}
 \begin{itemize}
 \item Required libraries: Eigen, OpenCV
-\item The executable files should work fine, but compiling the source code is hard due to libraries' configuration.
+\item The executable file is ./Apps/DigitRecognition/digitreg which would run in ubuntu 64bit.
+\item 
 \end{itemize}
-
 \newpage
 \section{Backpropagation Neural Network}
 The prototype for Backpropagation Neural Network (BnnnnPNN) is shown in Listing 1.
@@ -145,6 +137,10 @@ In my experiements, data are divided into the following three sets.
 \item \textbf{Test Set} is used to check trained network's precision. It includes 100 images.
 \end{enumerate}
 Firstly, I exam how training set's size affects BPNN's performance. In this experiment, hidden layer has 10 neurons, and regularized parameter is 0. As shown in Figure 2 and 3, as the size of the training set increases, the training error increases while the cross validation error decreases. Figure 2 shows that relationship when no noise involves, while Figure 3 shows it with 25\% of noise. In both cases, the precision is going up as the training set's size increases, though in different trajectory.
+Secondly, we examine how BPNN's precision is reduced after adding noise to training set. Hidden layer size is 10, training set size is 300. According to Figure 4, the more noise the training set has, the larger the cross validation error is and the lower the precision is. \\
+Finally, we try to find out how the size of hidden layer affects BPNN's precision and training error. Training set's size is 300, and noise is ignored. Figure 5 and 6 shows BPNN's performance according to the total number of neurons in hidden layer with or without noise, respectively.
+
+Finally, the usage of regularlization is considered. Figure 7 shows the BPNN's performance as the regularized parameter changes. Because regularlization is designed to counter overfit, only consider training set with noise in this case. Without noise, our training set is unlikely to spawn overfit. In this experiment, the training set size is 300, noise's ratio is 25\%, hidden layer's size is 50. 
 
 \begin{figure}[t]
   \centering
@@ -158,17 +154,29 @@ Firstly, I exam how training set's size affects BPNN's performance. In this expe
   \label{fig:m2}
 \end{figure}
 
-Secondly, we exam how BPNN's precision is reduced after adding noise to training set. Hidden layer size is 10, training set size is 300. According to Figure 4, the more noise the training set has, the larger the cross validation error is and the lower the precision is. \\
-Finally, I want to figure 
 \begin{figure}[t]
   \centering
   %%% hiddne = 10, lambda = 0, m = 300
   \includegraphics[scale=0.45]{3}
   \caption{Training, cross validation errors and precision's relationships with noise's ratio in training set.}
   \label{fig:m3}
+  \includegraphics[scale=0.8]{4}
+  \caption{Training, cross validation errors and precision's relationships with hidden layer's size.}
 \end{figure}
 
-% \newpage
+\begin{figure}[t]
+  \centering
+  \includegraphics[scale=0.8]{5}
+  \caption{Training, cross validation errors and precision's relationships with hidden layer's size.}
+  \includegraphics[scale=0.8]{6}
+  \caption{Training, cross validation errors and precision's relationships with regularized parameter.}
+\end{figure}
+\section{Discussion}
+Noise in training set has great influence on neural network performance. With the presence of noise, a good decision boundary is harder to find, which leads to the decline of precision. In order to counter noise, complexity of the recognition's problem should be considered. If the network's complexity is lower than the problem's complexity, then it is likely to suffer underfit. On the contrary, if the network's complexity is higher than the problem's complexity, then it will cause overfit with the presence of noise. According to Figure 3, one of the great way to suppress noise is to increase the size of training set. However big the noise's ratio in training set might be, if a large training set is available, we should be able to efficiently train the neural network. Another way to restrain noise's impact is to reduce the network's complexity, in other words, to have fewer neurons in hidden layer. The problem with this approach is that the neural network will become more susceptible to outliers or noise. Fortunately, we can use regularization to counter this trouble. As shown in Figure 7, the presence regularized parameter's existence alliviate noise impact. When regularized parameter is 0.1, we gain the highest precision for test's set, which is 68\%. Notice that the growth of training 
+error which is resulted from the increase of regularized parameter does not imply precision's reduction.
+
+All the experiments suggest that not training error but cross validation error is the factor to affect precision in test set. While precision increases, cross validation error always decreases while training error may or may not. That emphasizes the importance of cross validation method. By looking at the learning curve, which consists of cross validation error and training error, underfit or overfit problem can be resolved.
+\newpage
 \begin{thebibliography}{9}
 \bibitem{PRML}
   \label{itm:PRML}
@@ -177,7 +185,6 @@ Finally, I want to figure
   Springer
   1st Edition,
   2006
-
 \end{thebibliography}
 
 \end{document}
