@@ -127,7 +127,7 @@ int main(int argc, char **argv){
     // 	Exp1(300,0.25, 50,10000,learningRate,lambda[i],momentum,0.001);
     // }
 
-    Exp1(400,0.25, 20,10000,learningRate,0.1,momentum,0.001);
+    Exp1(700,0, 20,1000,learningRate,0.1,momentum,0.001);
 }
 
 
