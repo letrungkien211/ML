@@ -27,7 +27,6 @@ int main (int argc, char **argv)
     char fname[256]; //< image file name 
     char *traindir=(char *)"../caltech15/"; //< training data directory
 
-
     // create window
     char winname[] = "codebook generation";
     namedWindow( winname, CV_WINDOW_AUTOSIZE );

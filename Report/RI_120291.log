@@ -1,8 +1,8 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.1.1)  14 JAN 2013 12:05
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.1.1)  14 JAN 2013 21:02
 entering extended mode
  %&-line parsing enabled.
-**AI_120291_23.tex
-(./AI_120291_23.tex
+**RI_120291.tex
+(./RI_120291.tex
 LaTeX2e <2009/09/24>
 Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
 yphenation, farsi, arabic, croatian, bulgarian, ukrainian, russian, czech, slov
@@ -214,7 +214,7 @@ Package: atbegshi 2008/07/31 v1.9 At begin shipout hook (HO)
 File: hpdftex.def 2009/10/09 v6.79a Hyperref driver for pdfTeX
 \Fld@listcount=\count105
 )
-Package hyperref Info: Option `colorlinks' set `false' on input line 15.
+Package hyperref Info: Option `colorlinks' set `true' on input line 15.
 Package color Info: Redefining color red on input line 19.
 
 (/usr/share/texmf-texlive/tex/latex/listings/lstlang1.sty
@@ -225,8 +225,8 @@ File: lstlang1.sty 2004/09/05 1.3 listings language file
 )
 (/usr/share/texmf-texlive/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
-) (./AI_120291_23.aux)
-\openout1 = `AI_120291_23.aux'.
+) (./RI_120291.aux)
+\openout1 = `RI_120291.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 46.
 LaTeX Font Info:    ... okay on input line 46.
@@ -302,7 +302,7 @@ driver: pdftex
 \everyMPtoPDFconversion=\toks19
 )
 \c@lstlisting=\count111
-Package hyperref Info: Link coloring OFF on input line 46.
+Package hyperref Info: Link coloring ON on input line 46.
  (/usr/share/texmf-texlive/tex/latex/hyperref/nameref.sty
 Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
 
@@ -313,9 +313,10 @@ Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
 )
 LaTeX Info: Redefining \ref on input line 46.
 LaTeX Info: Redefining \pageref on input line 46.
- (./AI_120291_23.out) (./AI_120291_23.out)
+ (./RI_120291.out)
+(./RI_120291.out)
 \@outlinefile=\write3
-\openout3 = `AI_120291_23.out'.
+\openout3 = `RI_120291.out'.
 
 \AtBeginShipoutBox=\box29
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -348,60 +349,61 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <10.95> not available
 (Font)              Font shape `OT1/ppl/b/n' tried instead on input line 111.
- [2]
 LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <12> not available
 (Font)              Font shape `OT1/ppl/b/n' tried instead on input line 128.
- <img0014.jpg, id=96, 20.075pt x 20.075pt>
+ <img0014.jpg, id=76, 20.075pt x 20.075pt>
 File: img0014.jpg Graphic file (type jpg)
 
-<use img0014.jpg> <1.png, id=97, 990.70125pt x 707.64375pt>
+<use img0014.jpg> [2] <1.png, id=101, 990.70125pt x 707.64375pt>
 File: 1.png Graphic file (type png)
  <use 1.png>
-<2.png, id=99, 965.6075pt x 690.58pt>
+<2.png, id=103, 965.6075pt x 690.58pt>
 File: 2.png Graphic file (type png)
  <use 2.png>
-<3.png, id=100, 976.64874pt x 698.61pt>
+<3.png, id=104, 976.64874pt x 698.61pt>
 File: 3.png Graphic file (type png)
  <use 3.png>
-<4.png, id=101, 564.1075pt x 404.51125pt>
+<4.png, id=105, 564.1075pt x 404.51125pt>
 File: 4.png Graphic file (type png)
  <use 4.png>
-<5.png, id=102, 561.09625pt x 400.49625pt>
+<5.png, id=106, 561.09625pt x 400.49625pt>
 File: 5.png Graphic file (type png)
  <use 5.png>
-<6.png, id=103, 562.1pt x 421.575pt>
+<6.png, id=107, 562.1pt x 421.575pt>
 File: 6.png Graphic file (type png)
- <use 6.png> [3 <./img0014.jpg>] [4]
-[5 <./1.png> <./2.png>] [6 <./3.png> <./4.png>] [7 <./5.png> <./6.png (PNG copy
-)>] (./AI_120291_23.aux)
+ <use 6.png> [3 <./img0014.jpg>]
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 225.
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
- ) 
+(/usr/share/texmf-texlive/tex/latex/psnfss/ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+) [4] [5 <./1.png> <./2.png>] [6 <./3.png> <./4.png>] [7 <./5.png> <./6.png (PN
+G copy)>] (./RI_120291.aux) ) 
 Here is how much of TeX's memory you used:
- 6291 strings out of 493848
- 91247 string characters out of 1152824
- 483601 words of memory out of 3000000
- 9403 multiletter control sequences out of 15000+50000
- 16772 words of font info for 45 fonts, out of 3000000 for 9000
+ 6342 strings out of 493848
+ 91830 string characters out of 1152824
+ 483600 words of memory out of 3000000
+ 9443 multiletter control sequences out of 15000+50000
+ 18389 words of font info for 49 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 38i,8n,58p,1327b,1318s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-texli
-ve/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-texlive/fonts/ty
-pe1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/public/
-amsfonts/cm/cmmi6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/
-cmmi8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi9.pfb></
-usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/te
-xmf-texlive/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-texlive/f
-onts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/pu
-blic/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfon
-ts/cm/cmsy8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy9.
-pfb></usr/share/texmf-texlive/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/t
-exmf-texlive/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texmf-texlive/font
-s/type1/urw/palatino/uplri8a.pfb>
-Output written on AI_120291_23.pdf (7 pages, 221267 bytes).
+ 38i,8n,58p,1622b,1318s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.
+enc}</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/s
+hare/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-
+texlive/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texmf-texlive/font
+s/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-texlive/fonts/type1/publ
+ic/amsfonts/cm/cmmi9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/
+cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr6.pfb>
+</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/t
+exmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texliv
+e/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-texlive/fonts/type
+1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf-texlive/fonts/type1/urw/courie
+r/ucrr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/palatino/uplb8a.pfb></us
+r/share/texmf-texlive/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texmf-tex
+live/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on RI_120291.pdf (7 pages, 239736 bytes).
 PDF statistics:
- 206 PDF objects out of 1000 (max. 8388607)
- 74 named destinations out of 1000 (max. 500000)
- 76 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 222 PDF objects out of 1000 (max. 8388607)
+ 79 named destinations out of 1000 (max. 500000)
+ 84 words of extra memory for PDF output out of 10000 (max. 10000000)
 

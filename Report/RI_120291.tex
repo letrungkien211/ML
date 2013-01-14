@@ -10,7 +10,7 @@
 \usepackage{url}
 \usepackage{hyperref}
 \hypersetup{
-  colorlinks = false,
+  colorlinks = true,
   pdfborder={0 0 0}
 }
 \definecolor{dkgreen}{rgb}{0,0.6,0}
@@ -44,7 +44,7 @@
   emphstyle={\color{dkgreen}}
 }
 \begin{document}
-\title{Artificial Intelligence Report 7th Week-23rd Problem}
+\title{Robot Intelligence Report}
 \author{Le Trung Kien\\ 
   03-120291, 3rd Year \\
   Department of Mechano-Informatics \\ 
@@ -52,7 +52,7 @@
 }
 \maketitle
 \section{Backpropagation Neural Network}
-The prototype for Backpropagation Neural Network (BnnnnPNN) is shown in Listing 1.
+The prototype for Backpropagation Neural Network (BPNN) is shown in Listing 1.
 \begin{lstlisting}[caption={Backpropagation Neural Network Class (bpnn.hpp)}]
 class BPNN{
 private:
@@ -95,13 +95,13 @@ public:
 I am not going to talk much about BPNN's implementation, since it is very straightforward. Details about BPNN's theory can be seen in [\ref{itm:PRML}]. I just want to mention some important notes about the implementation:
 
 \begin{itemize}
-\item The training error and cross validation error is calculated as following:
+\item Error computation: The training error and cross validation error is calculated as following:
   \[E_{train}=\frac{1}{2mK}\sum\limits_{1}^{m}{\sum\limits_{1}^{K}{(y_{k}^{(l)}-t_{k}^{(l)})^2}}+
   \frac{\lambda}{2m} \sum\limits_{l=1}^{L-1} {\sum\limits_{i=1}^{s_l} {\sum\limits_{j=1}^{s_{l+1}}{(\Theta_{ji}^{(l)})^2} } } \]
   \[E_{cross}=\frac{1}{2pK}\sum\limits_{1}^{p}{\sum\limits_{1}^{K}{(y_{k}^{(l)}-t_{k}^{(l)})^2}}\]
   In which, $m$ is the size of training set, $p$ is the size of cross validation set, $K$ is the size of output, $L$ is the number of neural network layers, $\Theta$ is neural network's weight, $\lambda$ is regularization's parameter, $y$ is output vector, $t$ is desired output vector. When calculating training error, the bias is ignored.
 
-\item The most important method and its parameters of BPNN's class:
+\item Train method: The most important method and its parameters of BPNN's class:
 \begin{lstlisting}
 BPNN Train(const MatrixXd &trainInput, const MatrixXd &trainOuput, 
            double learningRate, double lambda, double momentum, 
@@ -117,36 +117,36 @@ BPNN Train(const MatrixXd &trainInput, const MatrixXd &trainOuput,
   \item \textbf{threshold} threshold to decide when error function converges
   \end{enumerate}
   This method \textbf{returns} a trained BPNN which is ready for pattern's recognition. 
-\item The usage of $momentum$ factor to accelarate convergence. The weight of neural network is updated as following:
+\item Momentum factor: The usage of $momentum$ factor to accelarate convergence. The weight of neural network is updated as following:
   \[ \Theta_{new} = \Theta_{old} +\alpha\Delta_{new} + \alpha\beta\Delta_{old} \]
   In which, $\alpha$ is learning rate, $\beta$ is momentum factor, $\Theta$ is weight, $\Delta$ is weight's gradient.
-\item The weight is randomly initialized before training. 
+\item Initialization: The weight is randomly initialized before training with expectation 0.
+\item Stop training: The training is stopped when training threshold reaches a threshold or the number of iterations exceeds the limit. Too early stop causes low performance, while too late stop leads to over-fitting. Because the error function in my implementation includes regularization, the threshold cannot simply decided. Therefore, I finally make the training stop after 1000 iterations and set a relatively low threshold for training error.
 \end{itemize}
 
-\newpage
 \section{Digit Recognition Application}
 \subsection{Data preparation}
-All the training and testing data which consists of 900 grayscale images are pulled from database in [1].
+All the training and testing data which consists of 900 gray scale images are pulled from database in [1].
 \begin{center}http://research.microsoft.com/en-us/um/people/cmbishop/prml/\end{center}
-All images have size of 20x20. Pixel's value is scaled from [0,255] range to [0,1] range. They are put into a single xml file along side with a xml file containing respective labels.
+All images have size of 20x20. Pixel's value is scaled from [0,255] range to [0,1] range. They are put into a single xml file along side with a xml file containing respective labels. Loading data from xml file is much faster than converting images repeatedly every time an experiment is conducted.
 \begin{figure}[ht]
   \centering
   \includegraphics[scale=5]{img0014}
   \caption{An image of 9}
   \label{fig:9}
 \end{figure}
-\textbf{Noise} is not directly generated from data but labels. In this report, noise should be solely thought as mislabels not distorted imgages.
+\textbf{Noise} is not directly generated from data but labels. In this report, noise should be solely thought as mislabels not distorted images.
 \subsection{Experiments}
-In my experiements, data are divided into the following three sets.
+In my experiments, data are divided into the following three sets. Those three sets are designed to plot the learning curve, which would show us the variance-bias trade-off of the training process. Therefore, the rightness of the training process can be easily checked and optimal hyper-parameters can be found.
 \begin{enumerate}
 \item \textbf{Training Set} is used for BPNN's training. Its size varies from 20 to 700.
-\item \textbf{Cross Validation Set} is used to check for overfitting and optimal parameters' selection. It includes 100 images.
+\item \textbf{Cross Validation Set} is used to check for over-fitting and optimal parameters' selection. It includes 100 images.
 \item \textbf{Test Set} is used to check trained network's precision. It includes 100 images.
 \end{enumerate}
 Firstly, I exam how training set's size affects BPNN's performance. In this experiment, hidden layer has 10 neurons, and regularized parameter is 0. As shown in Figure 2 and 3, as the size of the training set increases, the training error increases while the cross validation error decreases. Figure 2 shows that relationship when no noise involves, while Figure 3 shows it with 25\% of noise. In both cases, the precision is going up as the training set's size increases, though in different trajectory.
 Secondly, we examine how BPNN's precision is reduced after adding noise to training set. Hidden layer size is 10, training set size is 300. According to Figure 4, the more noise the training set has, the larger the cross validation error is and the lower the precision is. \\
 Finally, we try to find out how the size of hidden layer affects BPNN's precision and training error. Training set's size is 300, and noise is ignored. Figure 5 and 6 shows BPNN's performance according to the total number of neurons in hidden layer with or without noise, respectively.
-Finally, the usage of regularlization is considered. Figure 7 shows the BPNN's performance as the regularized parameter changes. Because regularlization is designed to counter overfit, only consider training set with noise in this case. Without noise, our training set is unlikely to spawn overfit. In this experiment, the training set size is 300, noise's ratio is 25\%, hidden layer's size is 50. 
+Finally, the usage of regularization is considered. Figure 7 shows the BPNN's performance as the regularized parameter changes. Because regularization is designed to counter over-fitting, only consider training set with noise in this case. Without noise, our training set is unlikely to spawn over-fitting. In this experiment, the training set size is 300, noise's ratio is 25\%, hidden layer's size is 50. 
 \begin{figure}[t]
   \centering
   %%% hiddne = 10, lambda = 0, noise = 25%
@@ -177,12 +177,18 @@ Finally, the usage of regularlization is considered. Figure 7 shows the BPNN's p
   \caption{Training, cross validation errors and precision's relationships with regularized parameter.}
 \end{figure}
 \section{Discussion}
-Noise in training set has great influence on neural network performance. With the presence of noise, a good decision boundary is harder to find, which leads to the decline of precision. In order to fight against noise, complexity of the recognition's problem should be considered. If the network's complexity is lower than the problem's complexity, then it is likely to suffer underfit. On the contrary, if the network's complexity is higher than the problem's complexity, then it will cause overfit, especially bad with the presence of noise. According to Figure 3, one of the great way to suppress noise is to increase the size of training set. However big the noise's ratio in training set might be, if a large training set is available, we should be able to efficiently train the neural network. Another way to restrain noise's impact is to increase the network's complexity, in other words, to have more neurons in hidden layer. The problem with this approach is that the neural network will become more susceptible to outliers or noise. Fortunately, we can use regularization to counter this trouble. As shown in Figure 7, the presence regularized parameter's existence alliviate noise impact. When regularized parameter is 0.1, we gain the highest precision for test's set, which is 68\%. Notice that the growth of training 
+Noise in training set has great influence on neural network performance. With the presence of noise, a good decision boundary is harder to find, which leads to the decline of precision. In order to fight against noise, complexity of the recognition's problem should be considered. If the network's complexity is lower than the problem's complexity, then it is likely to suffer under-fitting. On the contrary, if the network's complexity is higher than the problem's complexity, then it will cause over-fitting, especially bad with the presence of noise. According to Figure 3, one of the great way to suppress noise is to increase the size of training set. However big the noise's ratio in training set might be, if a large training set is available, we should be able to efficiently train the neural network. Another way to restrain noise's impact is to increase the network's complexity, in other words, to have more neurons in hidden layer. The problem with this approach is that the neural network will become more susceptible to outliers or noise. As shown in Figure 6, the precision grows as the hidden layer's size increases from 5 to about 30. However, when the hidden layer's size varies from 30 to 60, both the cross validation's error and the precision do not change much. That is the sign of over-fitting. Fortunately, we can use regularization to counter this trouble. As shown in Figure 7, the presence regularized parameter's existence alliviate noise impact. When regularized parameter is 0.1, we gain the highest precision for test's set, which is 68\%. Notice that the growth of training 
 error which is resulted from the increase of regularized parameter does not imply precision's reduction.
 
-All the experiments suggest that not training error but cross validation error is the factor to affect precision in test set. While precision increases, cross validation error always decreases while training error may or may not. That emphasizes the importance of cross validation method. By looking at the learning curve, which consists of cross validation error and training error, underfit or overfit problem can be resolved. Moreover, we can easily choose the optimal hyperparameters such as regularized parameter or number of neurons in hidden layer for training.
+All the experiments suggest that not training error but cross validation error is the factor to affect precision in test set. While precision increases, cross validation error always decreases while training error may or may not. That emphasizes the importance of cross validation method. By looking at the learning curve, which consists of cross validation error and training error, under-fitting or over-fitting problem can be resolved. Moreover, we can easily choose the optimal hyper-parameters such as regularized parameter or number of neurons in hidden layer for training. I use the nomenclature "cross validation" as suggested in [\ref{itm:ML}]. The cross validation method mentioned in [\ref{itm:PRML}] is more complicated and time-consuming. I opted for the simpler version of cross validation method, which actually did help to choose optimal hyper-parameters and check the rightness of training process as expected.
 
+In this report, neural network takes the original images as inputs. In fact, we can extract good features from those images and use them as inputs. However, as our training set is relatively large (90 images for each label), the features extraction is not that necessary. It would not improve the training performance much. Therefore, in this report, we did not conduct the features extracting process.
 
+\section{Comments}
+I think the class has been doing a good job on introducing various topics in Robot Intelligence. I particularly find those lectures about neural network useful and interesting, probably because they are taught thoroughly. Lectures about other topics were so shallow that I could not understand many new concepts. However, I think for introduction, they are enough.\\
+About this report, it was fun to actually make BPNN by myself. I actually made BPNN and another kind of neural network, namely, Self organizing map a long time ago. However, not until this time did I actually understand all the mathematics behind them. I think neural network is purely beautiful. I am sorry for placing graphs in those awkward positions. I am new to \LaTeX so I could not place them in between texts. All the graphs are plotted by Octave/Matlab. \\
+Source codes and report's raw files can be downloaded from \textbf{github} by the following command:
+\begin{center} \$ git clone https://github.com/letrungkien211/ML.git \end{center}
 \begin{thebibliography}{9}
 \bibitem{PRML}
   \label{itm:PRML}
@@ -191,6 +197,32 @@ All the experiments suggest that not training error but cross validation error i
   Springer
   1st Edition,
   2006
-\end{thebibliography}
 
+\bibitem{PC}
+  \label{itm:PC}
+  Richard O.Duda, Peter E. Hart
+  \emph{Pattern Classification},
+  Wiley-Interscience
+  2nd Edition,
+  2000
+\bibitem{AIMA}
+  \label{itm:AIMA}
+  Stuart Russell, Peter Norvig
+  \emph{  Aritifical Intelligence A Modern Approach},
+  Prentice Hall
+  3rd Edition,
+  December 2009
+\bibitem{SSCPS}
+  \label{itm:SSCPS}
+  George F. Luger
+  \emph{Artificial Intelligence, Structure and Strategies for Complex Problem Solving},
+  Addison Wesley Longman
+  3rd Edition,
+  2009
+\bibitem{ML}
+  \label{itm:ML}
+  Machine Learning Online Course by Prof Andrew Ng, Standford Univeristy \\
+  \url{https://www.coursera.org/course/ml}
+  
+\end{thebibliography}
 \end{document}
